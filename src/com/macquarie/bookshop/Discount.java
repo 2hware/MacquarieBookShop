@@ -7,5 +7,5 @@ import java.util.List;
  */
 public interface Discount {
 
-    public void applyDiscount(List<Item> itemList);
+    void applyDiscount(List<Item> itemList);
 }

@@ -10,7 +10,6 @@ import java.util.List;
 public class ShoppingCart {
 
 
-
     List<Item> itemList=null;
     private double totalPrice=0;
     private double totalDiscountedPrice =0;
@@ -32,7 +31,6 @@ public class ShoppingCart {
 
         totalPrice +=item.getOriginalPrice();
 
-
     }
 
 
@@ -41,11 +39,9 @@ public class ShoppingCart {
     public List<Item> getItemList() {return itemList;   }
 
 
-
     public void calculateTotalDiscount() {
         this.totalDiscountedPrice =0;
         itemList.forEach( item -> this.totalDiscountedPrice +=item.getOriginalPrice()-item.getDiscount());
-
 
     }
 

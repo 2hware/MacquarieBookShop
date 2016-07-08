@@ -1,4 +1,4 @@
-import com.macquarie.bookshop.DistinctPurchasesPercentageDiscount;
+import com.macquarie.bookshop.DistinctPercentageDiscount;
 import com.macquarie.bookshop.Item;
 import com.macquarie.bookshop.ShoppingCart;
 
@@ -8,31 +8,27 @@ public class Main {
 
         ShoppingCart shoppingCart=new ShoppingCart();
 
-        Item item1=new Item(1,8,"Book 1 ");
-        Item item2=new Item(1,8,"Book 2 ");
-        Item item3=new Item(1,8,"Book 3 ");
-        Item item4=new Item(1,8,"Book 4 ");
-        Item item5=new Item(1,8,"Book 5 ");
-        Item item6=new Item(1,8,"Book 3 ");
-        Item item7=new Item(1,8,"Book 4 ");
-        Item item8=new Item(5,8,"Book 5 ");
-        Item item9=new Item(6,8,"Book 5 ");
-        Item item10=new Item(5,8,"Book 5 ");
+        Item item11=new Item(1,8,"Book 1 ");
+        Item item21=new Item(2,8,"Book 2 ");
+        Item item31=new Item(3,8,"Book 3 ");
+        Item item12=new Item(1,8,"Book 1 ");
+        Item item22=new Item(2,8,"Book 2 ");
+        Item item23=new Item(3,8,"Book 3 ");
+        Item item4 =new Item(4,8,"Book 4 ");
+        Item item5 =new Item(5,8,"Book 5 ");
 
 
-        shoppingCart.addItem(item1);
-//        shoppingCart.addItem(item2);
-//        shoppingCart.addItem(item3);
-//        shoppingCart.addItem(item4);
-//       shoppingCart.addItem(item5);
-//        shoppingCart.addItem(item6);
-//        shoppingCart.addItem(item7);
-//        shoppingCart.addItem(item8);
-//      //  shoppingCart.addItem(item9);
-////        shoppingCart.addItem(item10);
+        shoppingCart.addItem(item11);
+        shoppingCart.addItem(item21);
+        shoppingCart.addItem(item31);
 
+        shoppingCart.addItem(item12);
+        shoppingCart.addItem(item22);
+        shoppingCart.addItem(item23);
+        shoppingCart.addItem(item4);
+        shoppingCart.addItem(item5);
 
-        DistinctPurchasesPercentageDiscount distinctPurchasesPercentageDiscount=new DistinctPurchasesPercentageDiscount();
+        DistinctPercentageDiscount distinctPurchasesPercentageDiscount=new DistinctPercentageDiscount();
         shoppingCart.applyDiscount(distinctPurchasesPercentageDiscount);
 
         System.out.println("Total Original price   :"+shoppingCart.getTotalPrice());

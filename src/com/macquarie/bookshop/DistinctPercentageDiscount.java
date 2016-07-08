@@ -6,41 +6,39 @@ import java.util.*;
 /**
  * Created by Hussein on 2016-07-01.
  */
-public class DistinctPurchasesPercentageDiscount implements Discount {
+public class DistinctPercentageDiscount implements Discount {
 
     Properties properties;
-    List<DistinctPurchasesPercentageDiscountRule> distinctPurchasesPercentageDiscountRules;
+    List<DistinctPercentageDiscountRule> distinctPercentageDiscountRules;
 
-    public DistinctPurchasesPercentageDiscount() {
+    public DistinctPercentageDiscount() {
         properties = new Properties();
         try {
             properties.load(new FileInputStream("resources//distinct-purchases-percentage-discount.properties"));
             generateRules();
-
-
         } catch (Exception e) {
-
+             System.out.println("ERROR"+e.getMessage());
         }
     }
 
     private void generateRules() {
-        distinctPurchasesPercentageDiscountRules = new ArrayList<>();
+        distinctPercentageDiscountRules = new ArrayList<>();
         Iterator i = properties.values().iterator();
 
         while (i.hasNext()) {
 
             String s = (String) i.next();
             String[] ss = s.split(",");
-            distinctPurchasesPercentageDiscountRules.add(new DistinctPurchasesPercentageDiscountRule(Integer.parseInt(ss[0]), Integer.parseInt(ss[1]), Integer.parseInt(ss[2])));
+            distinctPercentageDiscountRules.add(new DistinctPercentageDiscountRule(Integer.parseInt(ss[0]), Integer.parseInt(ss[1]), Integer.parseInt(ss[2])));
         }
-        Collections.sort(distinctPurchasesPercentageDiscountRules);
+        Collections.sort(distinctPercentageDiscountRules);
     }
 
 
     @Override
     public void applyDiscount(List<Item> itemList) {
         itemList.forEach(item -> item.resetDiscount());
-        for (DistinctPurchasesPercentageDiscount.DistinctPurchasesPercentageDiscountRule distinctPurchasesPercentageDiscountRule : this.distinctPurchasesPercentageDiscountRules) {
+        for (DistinctPercentageDiscountRule distinctPurchasesPercentageDiscountRule : this.distinctPercentageDiscountRules) {
             if (!(distinctPurchasesPercentageDiscountRule.count > itemList.size())) {
                 while (itemList.stream().filter(item -> !item.isDiscounted()).distinct().count() >= distinctPurchasesPercentageDiscountRule.count) {
                     itemList.stream().filter(item -> !item.isDiscounted()).distinct().limit(distinctPurchasesPercentageDiscountRule.count).forEach(item -> item.applyDiscount(distinctPurchasesPercentageDiscountRule.percentage));
@@ -49,20 +47,20 @@ public class DistinctPurchasesPercentageDiscount implements Discount {
         }
     }
 
-    class DistinctPurchasesPercentageDiscountRule implements Comparable<DistinctPurchasesPercentageDiscountRule> {
+    class DistinctPercentageDiscountRule implements Comparable<DistinctPercentageDiscountRule> {
 
         int priority;
         int count;
         int percentage;
 
-        public DistinctPurchasesPercentageDiscountRule(int priority, int count, int percentage) {
+        public DistinctPercentageDiscountRule(int priority, int count, int percentage) {
             this.priority = priority;
             this.count = count;
             this.percentage = percentage;
         }
 
         @Override
-        public int compareTo(DistinctPurchasesPercentageDiscountRule distinctPurchasesPercentageDiscountRule) {
+        public int compareTo(DistinctPercentageDiscountRule distinctPurchasesPercentageDiscountRule) {
             return Integer.compare(this.priority, distinctPurchasesPercentageDiscountRule.priority);
         }
     }
